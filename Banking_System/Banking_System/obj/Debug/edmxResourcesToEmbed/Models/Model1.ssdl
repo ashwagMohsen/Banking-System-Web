@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Typ_Id" Type="int" Nullable="false" />
+    <Property Name="AccNum" Type="int" Nullable="false" />
+    <Property Name="C_Id" Type="int" Nullable="false" />
+    <Property Name="Balance" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="C_Id" />
+    </Key>
+    <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Jop" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Phone" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="Emp_Id" />
+    </Key>
+    <Property Name="Emp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Emp_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Branch" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salary" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="Tran_Id" />
+    </Key>
+    <Property Name="Tran_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TranType" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="Acc_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeOfAccounts">
+    <Key>
+      <PropertyRef Name="Typ_Id" />
+    </Key>
+    <Property Name="Typ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Typ_Name" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Accounts_TypeOfAccounts">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="C_Id" />
+      </Principal>
+      <Dependent Role="Accounts">
+        <PropertyRef Name="C_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transactions_Accounts">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="Acc_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AccFun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="C_Fun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Deposit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+    <Parameter Name="Amount" Type="money" Mode="In" />
+    <Parameter Name="AccId" Type="int" Mode="In" />
+    <Parameter Name="Message" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="Display_Accounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Display_Clients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Display_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Display_Specific_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="accNum" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Display_Specific_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cli_name" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Display_Specific_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Display_Specific_Transaction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Display_Transactions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Insert_Into_Transaction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TranType" Type="nvarchar" Mode="In" />
+    <Parameter Name="Balance" Type="money" Mode="In" />
+    <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+    <Parameter Name="Message" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="InsertIntoAcc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="C_Id" Type="int" Mode="In" />
+    <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+    <Parameter Name="Balance" Type="money" Mode="In" />
+    <Parameter Name="Message" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="InsertIntoClients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Jop" Type="nvarchar" Mode="In" />
+    <Parameter Name="PhoneNum" Type="int" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+    <Parameter Name="Balance" Type="money" Mode="In" />
+    <Parameter Name="Message" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="Transfare" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+    <Parameter Name="Typ_Acc2" Type="nchar" Mode="In" />
+    <Parameter Name="Amount" Type="money" Mode="In" />
+    <Parameter Name="AccId" Type="int" Mode="In" />
+    <Parameter Name="AccId2" Type="int" Mode="In" />
+    <Parameter Name="Message" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="TypFun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="Typ_Acc" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Withdraw" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+    <Parameter Name="Amount" Type="money" Mode="In" />
+    <Parameter Name="AccId" Type="int" Mode="In" />
+    <Parameter Name="Message" Type="varchar" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="BankingModelStoreContainer">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeOfAccounts" EntityType="Self.TypeOfAccounts" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Accounts_TypeOfAccounts" Association="Self.FK_Accounts_TypeOfAccounts">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Accounts" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transactions_Accounts" Association="Self.FK_Transactions_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

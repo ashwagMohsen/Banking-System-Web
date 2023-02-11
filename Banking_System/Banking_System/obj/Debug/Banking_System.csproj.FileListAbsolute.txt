@@ -1,0 +1,113 @@
+E:\Banking_System\Banking_System\bin\roslyn\csc.exe
+E:\Banking_System\Banking_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Banking_System\Banking_System\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Banking_System\Banking_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Banking_System\Banking_System\bin\roslyn\System.Collections.Immutable.dll
+E:\Banking_System\Banking_System\bin\roslyn\System.Reflection.Metadata.dll
+E:\Banking_System\Banking_System\bin\roslyn\vbc.exe
+E:\Banking_System\Banking_System\bin\roslyn\VBCSCompiler.exe
+E:\Banking_System\Banking_System\bin\roslyn\VBCSCompiler.exe.config
+E:\Banking_System\Banking_System\bin\Banking_System.dll.config
+E:\Banking_System\Banking_System\bin\Banking_System.dll
+E:\Banking_System\Banking_System\bin\Banking_System.pdb
+E:\Banking_System\Banking_System\bin\EntityFramework.dll
+E:\Banking_System\Banking_System\bin\EntityFramework.SqlServer.dll
+E:\Banking_System\Banking_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Banking_System\Banking_System\bin\Microsoft.Web.Infrastructure.dll
+E:\Banking_System\Banking_System\bin\System.Web.Helpers.dll
+E:\Banking_System\Banking_System\bin\System.Web.Mvc.dll
+E:\Banking_System\Banking_System\bin\System.Web.Razor.dll
+E:\Banking_System\Banking_System\bin\System.Web.Webpages.Deployment.dll
+E:\Banking_System\Banking_System\bin\System.Web.Webpages.dll
+E:\Banking_System\Banking_System\bin\System.Web.Webpages.Razor.dll
+E:\Banking_System\Banking_System\bin\EntityFramework.xml
+E:\Banking_System\Banking_System\bin\EntityFramework.SqlServer.xml
+E:\Banking_System\Banking_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Banking_System\Banking_System\bin\System.Web.Razor.xml
+E:\Banking_System\Banking_System\bin\System.Web.Webpages.xml
+E:\Banking_System\Banking_System\bin\System.Web.Webpages.Deployment.xml
+E:\Banking_System\Banking_System\bin\System.Web.Webpages.Razor.xml
+E:\Banking_System\Banking_System\bin\System.Web.Helpers.xml
+E:\Banking_System\Banking_System\bin\System.Web.Mvc.xml
+E:\Banking_System\Banking_System\obj\Debug\Banking_System.dll
+E:\Banking_System\Banking_System\obj\Debug\Banking_System.pdb
+E:\Banking_System\Banking_System\obj\Debug\Banking_System.csprojResolveAssemblyReference.cache
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\csc.exe
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\System.Collections.Immutable.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\System.Reflection.Metadata.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\vbc.exe
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\VBCSCompiler.exe
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\roslyn\VBCSCompiler.exe.config
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\Banking_System.dll.config
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\Banking_System.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\Banking_System.pdb
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\EntityFramework.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\EntityFramework.SqlServer.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\Microsoft.Web.Infrastructure.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Helpers.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Mvc.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Razor.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Webpages.Deployment.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Webpages.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Webpages.Razor.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\EntityFramework.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\EntityFramework.SqlServer.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Razor.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Webpages.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Webpages.Deployment.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Webpages.Razor.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Helpers.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\bin\System.Web.Mvc.xml
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\obj\Debug\Banking_System.csprojResolveAssemblyReference.cache
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\obj\Debug\Banking_System.dll
+D:\مستوى ثالث\الترم الثاني\Banking_System\Banking_System\obj\Debug\Banking_System.pdb
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\csc.exe
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\Microsoft.CSharp.Core.targets
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\System.Collections.Immutable.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\System.Reflection.Metadata.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\vbc.exe
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\VBCSCompiler.exe
+H:\اشواق\all projects\Banking_System\Banking_System\bin\roslyn\VBCSCompiler.exe.config
+H:\اشواق\all projects\Banking_System\Banking_System\bin\Banking_System.dll.config
+H:\اشواق\all projects\Banking_System\Banking_System\bin\Banking_System.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\Banking_System.pdb
+H:\اشواق\all projects\Banking_System\Banking_System\bin\EntityFramework.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\EntityFramework.SqlServer.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\Microsoft.Web.Infrastructure.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Helpers.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Mvc.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Razor.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Webpages.Deployment.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Webpages.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Webpages.Razor.dll
+H:\اشواق\all projects\Banking_System\Banking_System\bin\EntityFramework.xml
+H:\اشواق\all projects\Banking_System\Banking_System\bin\EntityFramework.SqlServer.xml
+H:\اشواق\all projects\Banking_System\Banking_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Razor.xml
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Webpages.xml
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Webpages.Deployment.xml
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Webpages.Razor.xml
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Helpers.xml
+H:\اشواق\all projects\Banking_System\Banking_System\bin\System.Web.Mvc.xml
+H:\اشواق\all projects\Banking_System\Banking_System\obj\Debug\Banking_System.csprojAssemblyReference.cache
+H:\اشواق\all projects\Banking_System\Banking_System\obj\Debug\Banking_System.csproj.CoreCompileInputs.cache
+H:\اشواق\all projects\Banking_System\Banking_System\obj\Debug\Banking_System.csproj.CopyComplete
+H:\اشواق\all projects\Banking_System\Banking_System\obj\Debug\Banking_System.dll
+H:\اشواق\all projects\Banking_System\Banking_System\obj\Debug\Banking_System.pdb

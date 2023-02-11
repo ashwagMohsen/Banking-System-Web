@@ -1,0 +1,37 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500&display=swap');
+
+ * {
+    font-family: 'Cinzel-VariableFont_wght', sans-serif;
+  }
+  @font-face {
+            font-family: 'Cinzel-VariableFont_wght';
+            src: url('../fonts/Cinzel-VariableFont_wght.ttf') format('truetype');
+        }
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+   
+   background-image: url("~/Content/images/1.jpg") no-repeat top center;
+background-size: cover;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+position: relative;
+   /*background-color:red;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+     
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/*.container body-content{
+    background-color:red;
+}*/
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+

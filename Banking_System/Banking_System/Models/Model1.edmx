@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BankingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Typ_Id" Type="int" Nullable="false" />
+          <Property Name="AccNum" Type="int" Nullable="false" />
+          <Property Name="C_Id" Type="int" Nullable="false" />
+          <Property Name="Balance" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Jop" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Phone" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Branch" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="Tran_Id" />
+          </Key>
+          <Property Name="Tran_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TranType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Acc_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfAccounts">
+          <Key>
+            <PropertyRef Name="Typ_Id" />
+          </Key>
+          <Property Name="Typ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Typ_Name" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accounts_TypeOfAccounts">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="C_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="Acc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AccFun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="C_Fun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Deposit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+          <Parameter Name="Amount" Type="money" Mode="In" />
+          <Parameter Name="AccId" Type="int" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="Display_Accounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Display_Clients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Display_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Display_Specific_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="accNum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Display_Specific_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cli_name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Display_Specific_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Display_Specific_Transaction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Display_Transactions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Insert_Into_Transaction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TranType" Type="nvarchar" Mode="In" />
+          <Parameter Name="Balance" Type="money" Mode="In" />
+          <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="InsertIntoAcc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="C_Id" Type="int" Mode="In" />
+          <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+          <Parameter Name="Balance" Type="money" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="InsertIntoClients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Jop" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhoneNum" Type="int" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+          <Parameter Name="Balance" Type="money" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="Transfare" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+          <Parameter Name="Typ_Acc2" Type="nchar" Mode="In" />
+          <Parameter Name="Amount" Type="money" Mode="In" />
+          <Parameter Name="AccId" Type="int" Mode="In" />
+          <Parameter Name="AccId2" Type="int" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="TypFun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="Typ_Acc" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Withdraw" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Typ_Acc" Type="nchar" Mode="In" />
+          <Parameter Name="Amount" Type="money" Mode="In" />
+          <Parameter Name="AccId" Type="int" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="BankingModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfAccounts" EntityType="Self.TypeOfAccounts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accounts_TypeOfAccounts" Association="Self.FK_Accounts_TypeOfAccounts">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Accounts" Association="Self.FK_Transactions_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BankingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Typ_Id" Type="Int32" Nullable="false" />
+          <Property Name="AccNum" Type="Int32" Nullable="false" />
+          <Property Name="C_Id" Type="Int32" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Accounts_TypeOfAccounts" FromRole="Accounts" ToRole="Clients" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_Accounts" FromRole="Accounts" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Jop" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_TypeOfAccounts" FromRole="Clients" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="Tran_Id" />
+          </Key>
+          <Property Name="Tran_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TranType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Acc_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Transactions_Accounts" FromRole="Transactions" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="TypeOfAccounts">
+          <Key>
+            <PropertyRef Name="Typ_Id" />
+          </Key>
+          <Property Name="Typ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Typ_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accounts_TypeOfAccounts">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="C_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="Acc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" />
+          <EntitySet Name="TypeOfAccounts" EntityType="Self.TypeOfAccounts" />
+          <AssociationSet Name="FK_Accounts_TypeOfAccounts" Association="Self.FK_Accounts_TypeOfAccounts">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Accounts" Association="Self.FK_Transactions_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <FunctionImport Name="Deposit">
+            <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="AccId" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Display_Accounts" ReturnType="Collection(BankingModel.Display_Accounts_Result)" />
+          <FunctionImport Name="Display_Clients" ReturnType="Collection(BankingModel.Display_Clients_Result)" />
+          <FunctionImport Name="Display_Specific_Account" ReturnType="Collection(BankingModel.Display_Specific_Account_Result)">
+          <Parameter Name="accNum" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Display_Specific_Client" ReturnType="Collection(BankingModel.Display_Specific_Client_Result)">
+          <Parameter Name="Cli_name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Into_Transaction">
+            <Parameter Name="TranType" Mode="In" Type="String" />
+            <Parameter Name="Balance" Mode="In" Type="Decimal" />
+            <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertIntoAcc">
+            <Parameter Name="C_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+            <Parameter Name="Balance" Mode="In" Type="Decimal" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertIntoClients">
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Jop" Mode="In" Type="String" />
+            <Parameter Name="PhoneNum" Mode="In" Type="Int32" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+            <Parameter Name="Balance" Mode="In" Type="Decimal" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Transfare">
+            <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+            <Parameter Name="Typ_Acc2" Mode="In" Type="String" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="AccId" Mode="In" Type="Int32" />
+            <Parameter Name="AccId2" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Withdraw">
+            <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="AccId" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Display_Employee" ReturnType="Collection(BankingModel.Display_Employee_Result)" />
+          <FunctionImport Name="Display_Specific_Employee" ReturnType="Collection(BankingModel.Display_Specific_Employee_Result)">
+          <Parameter Name="EmpName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Display_Specific_Transaction" ReturnType="Collection(BankingModel.Display_Specific_Transaction_Result)">
+          <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Display_Transactions" ReturnType="Collection(BankingModel.Display_Transactions_Result)" />
+        </EntityContainer>
+        <ComplexType Name="Display_Accounts_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Typ_Id" Nullable="false" />
+          <Property Type="Int32" Name="AccNum" Nullable="false" />
+          <Property Type="Int32" Name="C_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Balance" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Display_Clients_Result">
+          <Property Type="Int32" Name="C_Id" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Jop" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Phone" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Display_Specific_Account_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Typ_Id" Nullable="false" />
+          <Property Type="Int32" Name="AccNum" Nullable="false" />
+          <Property Type="Int32" Name="C_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Balance" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Display_Specific_Client_Result">
+          <Property Type="Int32" Name="C_Id" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Jop" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Phone" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Display_Employee_Result">
+          <Property Type="Int32" Name="Emp_Id" Nullable="false" />
+          <Property Type="String" Name="Emp_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Branch" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Salary" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Display_Specific_Employee_Result">
+          <Property Type="Int32" Name="Emp_Id" Nullable="false" />
+          <Property Type="String" Name="Emp_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Branch" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Salary" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Display_Specific_Transaction_Result">
+          <Property Type="Int32" Name="Tran_Id" Nullable="false" />
+          <Property Type="String" Name="TranType" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Acc_Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Display_Transactions_Result">
+          <Property Type="Int32" Name="Tran_Id" Nullable="false" />
+          <Property Type="String" Name="TranType" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Acc_Id" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BankingModelStoreContainer" CdmEntityContainer="BankingEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="BankingModel.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Typ_Id" ColumnName="Typ_Id" />
+                <ScalarProperty Name="AccNum" ColumnName="AccNum" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="BankingModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Jop" ColumnName="Jop" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="BankingModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="BankingModel.Transactions">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="Tran_Id" ColumnName="Tran_Id" />
+                <ScalarProperty Name="TranType" ColumnName="TranType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Acc_Id" ColumnName="Acc_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfAccounts">
+            <EntityTypeMapping TypeName="BankingModel.TypeOfAccounts">
+              <MappingFragment StoreEntitySet="TypeOfAccounts">
+                <ScalarProperty Name="Typ_Id" ColumnName="Typ_Id" />
+                <ScalarProperty Name="Typ_Name" ColumnName="Typ_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Deposit" FunctionName="BankingModel.Store.Deposit" />
+          <FunctionImportMapping FunctionImportName="Display_Accounts" FunctionName="BankingModel.Store.Display_Accounts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankingModel.Display_Accounts_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Typ_Id" ColumnName="Typ_Id" />
+                <ScalarProperty Name="AccNum" ColumnName="AccNum" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Display_Clients" FunctionName="BankingModel.Store.Display_Clients">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankingModel.Display_Clients_Result">
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Jop" ColumnName="Jop" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Display_Specific_Account" FunctionName="BankingModel.Store.Display_Specific_Account">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankingModel.Display_Specific_Account_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Typ_Id" ColumnName="Typ_Id" />
+                <ScalarProperty Name="AccNum" ColumnName="AccNum" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Display_Specific_Client" FunctionName="BankingModel.Store.Display_Specific_Client">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankingModel.Display_Specific_Client_Result">
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Jop" ColumnName="Jop" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Insert_Into_Transaction" FunctionName="BankingModel.Store.Insert_Into_Transaction" />
+          <FunctionImportMapping FunctionImportName="InsertIntoAcc" FunctionName="BankingModel.Store.InsertIntoAcc" />
+          <FunctionImportMapping FunctionImportName="InsertIntoClients" FunctionName="BankingModel.Store.InsertIntoClients" />
+          <FunctionImportMapping FunctionImportName="Transfare" FunctionName="BankingModel.Store.Transfare" />
+          <FunctionImportMapping FunctionImportName="Withdraw" FunctionName="BankingModel.Store.Withdraw" />
+          <FunctionImportMapping FunctionImportName="Display_Employee" FunctionName="BankingModel.Store.Display_Employee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankingModel.Display_Employee_Result">
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Display_Specific_Employee" FunctionName="BankingModel.Store.Display_Specific_Employee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankingModel.Display_Specific_Employee_Result">
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Display_Specific_Transaction" FunctionName="BankingModel.Store.Display_Specific_Transaction">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankingModel.Display_Specific_Transaction_Result">
+                <ScalarProperty Name="Tran_Id" ColumnName="Tran_Id" />
+                <ScalarProperty Name="TranType" ColumnName="TranType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Acc_Id" ColumnName="Acc_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Display_Transactions" FunctionName="BankingModel.Store.Display_Transactions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankingModel.Display_Transactions_Result">
+                <ScalarProperty Name="Tran_Id" ColumnName="Tran_Id" />
+                <ScalarProperty Name="TranType" ColumnName="TranType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Acc_Id" ColumnName="Acc_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BankingModelStoreContainer" CdmEntityContainer="BankingEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="BankingModel.Accounts">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Typ_Id" ColumnName="Typ_Id" />
+          <ScalarProperty Name="AccNum" ColumnName="AccNum" />
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="BankingModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Jop" ColumnName="Jop" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="BankingModel.Employees">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="BankingModel.Transactions">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="Tran_Id" ColumnName="Tran_Id" />
+          <ScalarProperty Name="TranType" ColumnName="TranType" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Acc_Id" ColumnName="Acc_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOfAccounts">
+      <EntityTypeMapping TypeName="BankingModel.TypeOfAccounts">
+        <MappingFragment StoreEntitySet="TypeOfAccounts">
+          <ScalarProperty Name="Typ_Id" ColumnName="Typ_Id" />
+          <ScalarProperty Name="Typ_Name" ColumnName="Typ_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Deposit" FunctionName="BankingModel.Store.Deposit" />
+    <FunctionImportMapping FunctionImportName="Display_Accounts" FunctionName="BankingModel.Store.Display_Accounts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankingModel.Display_Accounts_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Typ_Id" ColumnName="Typ_Id" />
+          <ScalarProperty Name="AccNum" ColumnName="AccNum" />
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Display_Clients" FunctionName="BankingModel.Store.Display_Clients">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankingModel.Display_Clients_Result">
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Jop" ColumnName="Jop" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Display_Specific_Account" FunctionName="BankingModel.Store.Display_Specific_Account">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankingModel.Display_Specific_Account_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Typ_Id" ColumnName="Typ_Id" />
+          <ScalarProperty Name="AccNum" ColumnName="AccNum" />
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Display_Specific_Client" FunctionName="BankingModel.Store.Display_Specific_Client">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankingModel.Display_Specific_Client_Result">
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Jop" ColumnName="Jop" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Insert_Into_Transaction" FunctionName="BankingModel.Store.Insert_Into_Transaction" />
+    <FunctionImportMapping FunctionImportName="InsertIntoAcc" FunctionName="BankingModel.Store.InsertIntoAcc" />
+    <FunctionImportMapping FunctionImportName="InsertIntoClients" FunctionName="BankingModel.Store.InsertIntoClients" />
+    <FunctionImportMapping FunctionImportName="Transfare" FunctionName="BankingModel.Store.Transfare" />
+    <FunctionImportMapping FunctionImportName="Withdraw" FunctionName="BankingModel.Store.Withdraw" />
+    <FunctionImportMapping FunctionImportName="Display_Employee" FunctionName="BankingModel.Store.Display_Employee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankingModel.Display_Employee_Result">
+          <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Display_Specific_Employee" FunctionName="BankingModel.Store.Display_Specific_Employee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankingModel.Display_Specific_Employee_Result">
+          <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Display_Specific_Transaction" FunctionName="BankingModel.Store.Display_Specific_Transaction">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankingModel.Display_Specific_Transaction_Result">
+          <ScalarProperty Name="Tran_Id" ColumnName="Tran_Id" />
+          <ScalarProperty Name="TranType" ColumnName="TranType" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Acc_Id" ColumnName="Acc_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Display_Transactions" FunctionName="BankingModel.Store.Display_Transactions">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankingModel.Display_Transactions_Result">
+          <ScalarProperty Name="Tran_Id" ColumnName="Tran_Id" />
+          <ScalarProperty Name="TranType" ColumnName="TranType" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Acc_Id" ColumnName="Acc_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

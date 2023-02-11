@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Typ_Id" Type="Int32" Nullable="false" />
+    <Property Name="AccNum" Type="Int32" Nullable="false" />
+    <Property Name="C_Id" Type="Int32" Nullable="false" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Accounts_TypeOfAccounts" FromRole="Accounts" ToRole="Clients" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_Accounts" FromRole="Accounts" ToRole="Transactions" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="C_Id" />
+    </Key>
+    <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Jop" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_TypeOfAccounts" FromRole="Clients" ToRole="Accounts" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="Emp_Id" />
+    </Key>
+    <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Emp_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="Tran_Id" />
+    </Key>
+    <Property Name="Tran_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TranType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Acc_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Transactions_Accounts" FromRole="Transactions" ToRole="Accounts" />
+  </EntityType>
+  <EntityType Name="TypeOfAccounts">
+    <Key>
+      <PropertyRef Name="Typ_Id" />
+    </Key>
+    <Property Name="Typ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Typ_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Accounts_TypeOfAccounts">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="C_Id" />
+      </Principal>
+      <Dependent Role="Accounts">
+        <PropertyRef Name="C_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transactions_Accounts">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="Acc_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" />
+    <EntitySet Name="Transactions" EntityType="Self.Transactions" />
+    <EntitySet Name="TypeOfAccounts" EntityType="Self.TypeOfAccounts" />
+    <AssociationSet Name="FK_Accounts_TypeOfAccounts" Association="Self.FK_Accounts_TypeOfAccounts">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Accounts" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transactions_Accounts" Association="Self.FK_Transactions_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <FunctionImport Name="Deposit">
+      <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="AccId" Mode="In" Type="Int32" />
+      <Parameter Name="Message" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Display_Accounts" ReturnType="Collection(BankingModel.Display_Accounts_Result)" />
+    <FunctionImport Name="Display_Clients" ReturnType="Collection(BankingModel.Display_Clients_Result)" />
+    <FunctionImport Name="Display_Specific_Account" ReturnType="Collection(BankingModel.Display_Specific_Account_Result)">
+      <Parameter Name="accNum" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Display_Specific_Client" ReturnType="Collection(BankingModel.Display_Specific_Client_Result)">
+      <Parameter Name="Cli_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Insert_Into_Transaction">
+      <Parameter Name="TranType" Mode="In" Type="String" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+      <Parameter Name="Message" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertIntoAcc">
+      <Parameter Name="C_Id" Mode="In" Type="Int32" />
+      <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="Message" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertIntoClients">
+      <Parameter Name="FullName" Mode="In" Type="String" />
+      <Parameter Name="Jop" Mode="In" Type="String" />
+      <Parameter Name="PhoneNum" Mode="In" Type="Int32" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="Message" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Transfare">
+      <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+      <Parameter Name="Typ_Acc2" Mode="In" Type="String" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="AccId" Mode="In" Type="Int32" />
+      <Parameter Name="AccId2" Mode="In" Type="Int32" />
+      <Parameter Name="Message" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Withdraw">
+      <Parameter Name="Typ_Acc" Mode="In" Type="String" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="AccId" Mode="In" Type="Int32" />
+      <Parameter Name="Message" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Display_Employee" ReturnType="Collection(BankingModel.Display_Employee_Result)" />
+    <FunctionImport Name="Display_Specific_Employee" ReturnType="Collection(BankingModel.Display_Specific_Employee_Result)">
+      <Parameter Name="EmpName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Display_Specific_Transaction" ReturnType="Collection(BankingModel.Display_Specific_Transaction_Result)">
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Display_Transactions" ReturnType="Collection(BankingModel.Display_Transactions_Result)" />
+  </EntityContainer>
+  <ComplexType Name="Display_Accounts_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Typ_Id" Nullable="false" />
+    <Property Type="Int32" Name="AccNum" Nullable="false" />
+    <Property Type="Int32" Name="C_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Balance" Nullable="false" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="Display_Clients_Result">
+    <Property Type="Int32" Name="C_Id" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Jop" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="Phone" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="Display_Specific_Account_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Typ_Id" Nullable="false" />
+    <Property Type="Int32" Name="AccNum" Nullable="false" />
+    <Property Type="Int32" Name="C_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Balance" Nullable="false" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="Display_Specific_Client_Result">
+    <Property Type="Int32" Name="C_Id" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Jop" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="Phone" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="Display_Employee_Result">
+    <Property Type="Int32" Name="Emp_Id" Nullable="false" />
+    <Property Type="String" Name="Emp_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Branch" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="Salary" Nullable="false" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="Display_Specific_Employee_Result">
+    <Property Type="Int32" Name="Emp_Id" Nullable="false" />
+    <Property Type="String" Name="Emp_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Branch" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="Salary" Nullable="false" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="Display_Specific_Transaction_Result">
+    <Property Type="Int32" Name="Tran_Id" Nullable="false" />
+    <Property Type="String" Name="TranType" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+    <Property Type="Int32" Name="Acc_Id" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Display_Transactions_Result">
+    <Property Type="Int32" Name="Tran_Id" Nullable="false" />
+    <Property Type="String" Name="TranType" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+    <Property Type="Int32" Name="Acc_Id" Nullable="false" />
+  </ComplexType>
+</Schema>
