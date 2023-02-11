@@ -1,0 +1,160 @@
+﻿@model Banking_System.Models.Clients
+
+@{
+    ViewBag.Title = "AddClient";
+}
+<style>
+    td{
+        padding-right:70px;
+        padding-bottom:20px;
+    }
+      h2,h4{
+        font-family:'Cinzel-VariableFont_wght'
+    }
+</style>
+<div style="color:white;margin-left:600px">
+    <br />
+    <br />
+    <h2>AddClient</h2>
+
+
+    @using (Html.BeginForm("AddClient", "Banking", FormMethod.Post))
+    {  @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Clients</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
+            <table>
+                <tr>
+                <td>@Html.LabelFor(model => model.FullName)</td>
+                <td>
+                    @Html.EditorFor(model => model.FullName@*, new { htmlAttributes = new { @class = "textboxes" } }*@)
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </td>
+            </tr>
+            <tr>
+            <td>@Html.LabelFor(model => model.Jop)</td>
+            <td>
+                @Html.EditorFor(model => model.Jop@*, new { htmlAttributes = new { @class = "form-control" } }*@)
+            @Html.ValidationMessageFor(model => model.Jop, "", new { @class = "text-danger" })
+        </td>
+        </tr>
+        <tr>
+        <td>@Html.LabelFor(model => model.Phone)</td>
+        <td>
+            @Html.EditorFor(model => model.Phone@*, new { htmlAttributes = new { @class = "form-control" } }*@)
+        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+    </td>
+    </tr>
+    <tr>
+    <td>@Html.LabelFor(model => model.Address)</td>
+    <td>
+        @Html.EditorFor(model => model.Address@*, new { htmlAttributes = new { @class = "form-control" } }*@)
+    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+</td>
+                  </tr>
+<tr>
+<td>@Html.Label("Balance")</td>
+<td>
+    @Html.EditorFor(model=>model.Balance@*, new { htmlAttributes = new { @class = "form-control" } }*@)
+@Html.ValidationMessage("Balance", "", new { @class = "text-danger" })
+</td>
+                  </tr>
+<tr>
+    @{ List<string> list = new List<string>(2) { "Business  ", "Current   " };}
+    <td>@Html.Label("Type of an Account")</td>
+                <td>
+                    @Html.DropDownListFor(model=>model.typeOfAcc, new SelectList(list), "Type of an Account")
+                @Html.ValidationMessage("typeOfAcc", "", new { @class = "text-danger" })
+            </td>
+                  </tr>
+            </table>
+            <br />
+          
+
+            <div style="margin-left:0px" class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default btnnew" />
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+        }
+    </div>
+
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @*<div class="form-group">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "lbls5" })
+            @Html.EditorFor(model => model.FullName@*, new { htmlAttributes = new { @class = "textboxes" } }*@@*)*@
+                    @*@Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-10">
+                                @Html.LabelFor(model => model.Jop, htmlAttributes: new { @class = "lbls4" })*@
+                    @*@Html.EditorFor(model => model.Jop@*, new { htmlAttributes = new { @class = "form-control" } }*@@*)*@
+                    @*@Html.ValidationMessageFor(model => model.Jop, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-10">
+                                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "lbls3" })*@
+                    @*@Html.EditorFor(model => model.Phone@*, new { htmlAttributes = new { @class = "form-control" } }*@@*)*@
+                    @*@Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-10">
+                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "lbls2" })*@
+                    @*@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-md-10">
+                                @Html.Label("Balance", htmlAttributes: new { @class = "lbls2" })*@
+                    @*@Html.Editor("Balance", new { htmlAttributes = new { @class = "form-control" } })
+                                  @Html.ValidationMessage("Balance", "", new { @class = "text-danger" })
+                                </div>
+                            </div>@{ List<string> list = new List<string>(2) { "Business  ", "Current   " };
+
+                            }
+                            <div class="form-group" >
+
+                                <div class="col-md-10">
+                                    @Html.Label("Type of an Account", htmlAttributes: new { @class = "lbls" })
+                                    @Html.DropDownList("typeOfAcc",new SelectList(list),"Type of an Account")
+                                    @Html.ValidationMessage("typeOfAcc", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="form-group">
+                                <div style="margin-left:6px" class="col-md-offset-2 col-md-10">
+                                    <input   type="submit" value="Create" class="btn btn-default btnnew" />
+                                </div>
+                            </div>
+                        </div>
+                        <script>alert();</script>*@

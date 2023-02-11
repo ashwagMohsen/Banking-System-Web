@@ -1,0 +1,111 @@
+﻿@model Banking_System.Models.Accounts
+
+@{
+    ViewBag.Title = "Deposit";
+}
+<style>
+    td {
+        padding-right: 70px;
+        padding-bottom: 20px;
+    }
+      h2,h4{
+        font-family:'Cinzel-VariableFont_wght'
+    }
+</style><br />
+<br />
+<div style="color:white;margin-left:600px">
+    <h2>Deposit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Accounts</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
+            <table>
+                <tr>
+                    <td>@Html.Label("Account number")</td>
+                    <td>@Html.EditorFor(model => model.AccNum)
+                    @Html.ValidationMessageFor(model => model.AccNum, "", new { @class = "text-danger" })</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Amount of mony")</td>
+                    <td>@Html.EditorFor(model=>model.Balance,"Amount")
+                    @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "text-danger" })</td>
+                </tr>
+                @{ List<string> list = new List<string>(2) { "Business  ", "Current   " };
+
+                }
+                <tr>
+                    <td>@Html.Label("Type of an Account")</td>
+                    <td>@Html.DropDownList("typeOfAcc",
+            new SelectList(list),
+            "Type of an Account")
+                    @Html.ValidationMessage("typeOfAcc", "", new { @class = "text-danger" })</td>
+                </tr>
+                @*<tr>
+                    <td colspan="2"></td>
+                </tr>*@
+            </table>
+            <br />
+            <br />
+            <div style="margin-left:0px" class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default btnnew" />
+            </div>
+
+        </div>
+                }
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+   
+    <div >
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+@*<div class="form-group">
+    @Html.LabelFor(model => model.AccNum, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.AccNum, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AccNum, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+
+<div class="form-group">
+    @Html.Label("Amount", htmlAttributes: new { @class = "control -label col-md-2" })
+    <div class="col-md-10">
+        @Html.Editor("Amount", new { htmlAttributes = new { @class = "form -control" } })
+        @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "text-danger" })
+    </div>
+</div>
+@{ List<string> list = new List<string>(2) { "Business  ", "Current   " };
+
+}
+<div class="form-group">
+    @Html.Label("Type of an Account", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("typeOfAcc",
+            new SelectList(list),
+            "Type of an Account")
+        @Html.ValidationMessage("typeOfAcc", "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    <div style="margin-left:6px" class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Create" class="btn btn-default btnnew" />
+    </div>
+</div>*@

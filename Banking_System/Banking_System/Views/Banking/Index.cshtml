@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="system-title"><h>Banking System</h></div>
+<div class="divbtnnew">
+    @*<button id="btn2">Operations</button><button id="btn">Displays</button>*@
+    <div style="font-size:20px;margin:20px ;"><a id="btn2" style="cursor:pointer" >Operations </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="cursor:pointer;margin-right:60px" id="btn">Displays </a>
+</div>  
+    <div id="op">
+        <a href="../Banking/AddClient" id="op"><button class="btnnew " @*style="position:static"*@>Add New Client</button></a>
+        <br />
+        <br />
+        <a href="../Banking/AddAcount" id="op2"><button class="btnnew " @*style="position:static"*@>Add New Account</button></a>
+        <br />
+        <br />
+        <a href="../Banking/Deposit" id="op3"><button class="btnnew " @*style="position:static"*@>Deposit Mony</button></a>
+        <br />
+        <br />
+        <a href="../Banking/Withdraw" id="op4"><button class="btnnew " @*style="position:static"*@>Withdraw Mony</button></a>
+        <br />
+        <br />
+        <a href="../Banking/Transefare" id="op5"><button class="btnnew " @*style="position:static"*@>Transefare Mony</button></a>
+        <br />
+    </div>
+   <div id="box" style="display:none">
+       <a href="../Banking/Display_Accounts" @*id="box"*@ ><button class="btnnew ">Display Accounts </button></a>
+       <br />
+       <br />
+       <a href="../Banking/Display_Clints" id="box2" ><button class="btnnew ">Display Clints</button></a>
+       <br />
+       <br />
+       <a href="../Banking/Display_Employee" id="box3" ><button class="btnnew ">Display Employee</button></a>
+       <br />
+       <br />
+       <a href="../Banking/Display_Transactions" id="box4" ><button class="btnnew ">Display Transactions</button></a>
+       <br />
+       <br />
+       <br />
+       <br />
+   </div>
+
+   </div>
+
+<br />
+<br />
+<div  id="o" hidden>
+    @ViewBag.message1
+</div>
+
+<script type="text/javascript">
+    var y = document.getElementById("o").innerHTML;
+  
+    window.addEventListener('load', function () { if (y != null) { alert(y); } });
+    
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', () => {
+        const op = document.getElementById('op');
+        op.style.display = 'none';
+        const box = document.getElementById('box');
+        box.style.display = 'block';
+     
+
+    });
+    const btn2 = document.getElementById('btn2');
+    btn2.addEventListener('click', () => {
+        const op = document.getElementById('op');
+        op.style.display = 'block';
+        const box = document.getElementById('box');
+        box.style.display = 'none';
+    });
+</script>

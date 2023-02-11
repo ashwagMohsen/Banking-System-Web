@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Banking_System.Models.Transactions>
+
+@{
+    ViewBag.Title = "Display_Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    h2, h4 {
+        font-family: 'Cinzel-VariableFont_wght';
+    }
+</style>
+<div style="position: relative;
+  
+    color: #fff;
+    background-color: rgba(0,0,0,.5);">
+    <h2>Display_Transactions</h2>
+    <br />
+    @using (Html.BeginForm("Display_Transactions", "Banking", FormMethod.Post))
+    {
+        <p>@Html.TextBox("name")<input type="submit" value="Search Transaction" /></p>
+    }
+    <br />
+    <p>
+        @Html.ActionLink("Back Home", "Index")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TranType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accounts.Id)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TranType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accounts.Id)
+                </td>
+              
+            </tr>
+        }
+
+    </table>
+   </div>
